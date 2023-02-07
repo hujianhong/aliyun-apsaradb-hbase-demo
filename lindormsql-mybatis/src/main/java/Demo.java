@@ -5,6 +5,8 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.Date;
+import java.sql.Time;
 
 public class Demo {
     public static void main(String[] args) throws IOException {
@@ -17,8 +19,10 @@ public class Demo {
             session.commit();
             System.out.println("create table user");
             System.out.println(mapper.selectAllUser());
-            mapper.insertUser(new User("001", "zhangsan"));
-            mapper.insertUser(new User("002", "lisi"));
+            mapper.insertUser(new User("001", "zhangsan",
+                new Time(System.currentTimeMillis()), new Date(System.currentTimeMillis())));
+            mapper.insertUser(new User("002", "lisi",
+                new Time(System.currentTimeMillis()), new Date(System.currentTimeMillis())));
             session.commit();
             System.out.println(mapper.selectAllUser());
             System.out.println(mapper.selectOneUser("001"));
